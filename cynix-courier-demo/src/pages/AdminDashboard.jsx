@@ -4,11 +4,11 @@ import { GlassCard } from '../components/ui/GlassCard';
 import { KPICard } from '../components/ui/KPICard';
 import { StatusChip } from '../components/ui/StatusChip';
 import { PackageDetailModal } from '../components/PackageDetailModal';
-import { Package, CheckCircle, Truck, DollarSign, Search, Filter } from 'lucide-react';
+import { Package, CheckCircle, Truck, DollarSign, Search, Filter, ShoppingCart } from 'lucide-react';
 import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
 
 export function AdminDashboard() {
-  const { packages, invoices } = useContext(AppContext);
+  const { packages, invoices, productOrders } = useContext(AppContext);
   const [selectedPkg, setSelectedPkg] = useState(null);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
@@ -17,6 +17,9 @@ export function AdminDashboard() {
   const inTransit = packages.filter(p => ['In Transit to Bahamas', 'Out for Delivery'].includes(p.status)).length;
   const pendingInvoices = invoices.filter(inv => inv.status === 'Unpaid').reduce((sum, inv) => sum + inv.amount, 0);
   const deliveredToday = packages.filter(p => p.status === 'Delivered' && new Date(p.timeline[p.timeline.length-1].timestamp).toDateString() === new Date().toDateString()).length;
+  
+  // Use mock total for product orders to ensure it shows up in demo
+  const productOrdersCount = productOrders.length + 5; 
 
   // Pipeline Data
   const statuses = [
@@ -56,54 +59,69 @@ export function AdminDashboard() {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-         <KPICard title="Packages Today" value={totalPackages + 15} icon={Package} trend="12% vs yesterday" trendUp={true} accentColor="rgba(96, 165, 250, 0.4)" />
-         <KPICard title="In Transit" value={inTransit} icon={Truck} trend="Stable" trendUp={true} accentColor="rgba(252, 211, 77, 0.4)" />
-         <KPICard title="Pending Invoices" value={`$${pendingInvoices.toLocaleString(undefined, {minimumFractionDigits: 2})}`} icon={DollarSign} trend="Needs attention" trendUp={false} accentColor="rgba(248, 113, 113, 0.4)" />
-         <KPICard title="Delivered Today" value={deliveredToday + 8} icon={CheckCircle} trend="5% vs yesterday" trendUp={true} accentColor="rgba(52, 211, 153, 0.4)" />
+      <div className="flex overflow-x-auto hide-scrollbar snap-x snap-mandatory gap-6 pb-4 lg:grid lg:grid-cols-5 md:overflow-visible md:pb-0">
+         <div className="min-w-[85vw] max-w-[350px] snap-center shrink-0 md:w-auto md:min-w-0 md:max-w-none">
+            <KPICard title="Packages Today" value={totalPackages + 15} icon={Package} trend="12% vs yesterday" trendUp={true} accentColor="rgba(96, 165, 250, 0.4)" />
+         </div>
+         <div className="min-w-[85vw] max-w-[350px] snap-center shrink-0 md:w-auto md:min-w-0 md:max-w-none">
+            <KPICard title="In Transit" value={inTransit} icon={Truck} trend="Stable" trendUp={true} accentColor="rgba(252, 211, 77, 0.4)" />
+         </div>
+         <div className="min-w-[85vw] max-w-[350px] snap-center shrink-0 md:w-auto md:min-w-0 md:max-w-none">
+            <KPICard title="Pending Invoices" value={`$${pendingInvoices.toLocaleString(undefined, {minimumFractionDigits: 2})}`} icon={DollarSign} trend="Needs attention" trendUp={false} accentColor="rgba(248, 113, 113, 0.4)" />
+         </div>
+         <div className="min-w-[85vw] max-w-[350px] snap-center shrink-0 md:w-auto md:min-w-0 md:max-w-none">
+            <KPICard title="Product Orders" value={productOrdersCount} icon={ShoppingCart} trend="New channel" trendUp={true} accentColor="rgba(232, 98, 26, 0.4)" />
+         </div>
+         <div className="min-w-[85vw] max-w-[350px] snap-center shrink-0 md:w-auto md:min-w-0 md:max-w-none">
+            <KPICard title="Delivered Today" value={deliveredToday + 8} icon={CheckCircle} trend="5% vs yesterday" trendUp={true} accentColor="rgba(52, 211, 153, 0.4)" />
+         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-         <GlassCard className="p-6 lg:col-span-2 flex flex-col">
-            <h3 className="text-lg font-semibold text-white mb-6">Package Pipeline</h3>
-            <div className="flex-1 min-h-[250px] w-full">
-               <ResponsiveContainer width="99%" height={250} minWidth={1} minHeight={1}>
-                  <BarChart data={pipelineData}>
-                     <XAxis dataKey="name" stroke="rgba(255,255,255,0.4)" fontSize={12} tickLine={false} axisLine={false} />
-                     <Tooltip 
-                        contentStyle={{ background: 'rgba(15,23,42,0.8)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', backdropFilter: 'blur(10px)' }}
-                        itemStyle={{ color: '#60A5FA' }}
-                        labelStyle={{ color: 'rgba(255,255,255,0.8)' }}
-                        formatter={(value, name, props) => [value, props.payload.fullName]}
-                     />
-                     <Bar dataKey="count" fill="#3B82F6" radius={[4, 4, 0, 0]} />
-                  </BarChart>
-               </ResponsiveContainer>
-            </div>
-         </GlassCard>
+      <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-4 md:grid md:grid-cols-1 lg:grid-cols-3 md:overflow-visible md:pb-0">
+         <div className="min-w-[85vw] snap-center shrink-0 md:w-auto md:min-w-0 lg:col-span-2">
+            <GlassCard className="p-6 flex flex-col h-full">
+               <h3 className="text-lg font-semibold text-white mb-6">Package Pipeline</h3>
+               <div className="flex-1 min-h-[250px] w-full">
+                  <ResponsiveContainer width="99%" height={250} minWidth={1} minHeight={1}>
+                     <BarChart data={pipelineData}>
+                        <XAxis dataKey="name" stroke="rgba(255,255,255,0.4)" fontSize={12} tickLine={false} axisLine={false} />
+                        <Tooltip 
+                           contentStyle={{ background: 'rgba(15,23,42,0.8)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', backdropFilter: 'blur(10px)' }}
+                           itemStyle={{ color: '#60A5FA' }}
+                           labelStyle={{ color: 'rgba(255,255,255,0.8)' }}
+                           formatter={(value, name, props) => [value, props.payload.fullName]}
+                        />
+                        <Bar dataKey="count" fill="#3B82F6" radius={[4, 4, 0, 0]} />
+                     </BarChart>
+                  </ResponsiveContainer>
+               </div>
+            </GlassCard>
+         </div>
 
-         <GlassCard className="p-6 flex flex-col">
-            <h3 className="text-lg font-semibold text-white mb-6">Revenue Trend</h3>
-            <div className="flex-1 min-h-[250px] w-full">
-               <ResponsiveContainer width="99%" height={250} minWidth={1} minHeight={1}>
-                  <AreaChart data={revData}>
-                     <defs>
-                        <linearGradient id="colorRev" x1="0" y1="0" x2="0" y2="1">
-                           <stop offset="5%" stopColor="#34D399" stopOpacity={0.3}/>
-                           <stop offset="95%" stopColor="#34D399" stopOpacity={0}/>
-                        </linearGradient>
-                     </defs>
-                     <XAxis dataKey="day" stroke="rgba(255,255,255,0.4)" fontSize={12} tickLine={false} axisLine={false} />
-                     <Tooltip 
-                        contentStyle={{ background: 'rgba(15,23,42,0.8)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', backdropFilter: 'blur(10px)' }}
-                        itemStyle={{ color: '#34D399' }}
-                        labelStyle={{ color: 'rgba(255,255,255,0.8)' }}
-                     />
-                     <Area type="monotone" dataKey="value" stroke="#34D399" fillOpacity={1} fill="url(#colorRev)" />
-                  </AreaChart>
-               </ResponsiveContainer>
-            </div>
-         </GlassCard>
+         <div className="min-w-[85vw] snap-center shrink-0 md:w-auto md:min-w-0">
+            <GlassCard className="p-6 flex flex-col h-full">
+               <h3 className="text-lg font-semibold text-white mb-6">Revenue Trend</h3>
+               <div className="flex-1 min-h-[250px] w-full">
+                  <ResponsiveContainer width="99%" height={250} minWidth={1} minHeight={1}>
+                     <AreaChart data={revData}>
+                        <defs>
+                           <linearGradient id="colorRev" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="5%" stopColor="#34D399" stopOpacity={0.3}/>
+                              <stop offset="95%" stopColor="#34D399" stopOpacity={0}/>
+                           </linearGradient>
+                        </defs>
+                        <XAxis dataKey="day" stroke="rgba(255,255,255,0.4)" fontSize={12} tickLine={false} axisLine={false} />
+                        <Tooltip 
+                           contentStyle={{ background: 'rgba(15,23,42,0.8)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', backdropFilter: 'blur(10px)' }}
+                           itemStyle={{ color: '#34D399' }}
+                           labelStyle={{ color: 'rgba(255,255,255,0.8)' }}
+                        />
+                        <Area type="monotone" dataKey="value" stroke="#34D399" fillOpacity={1} fill="url(#colorRev)" />
+                     </AreaChart>
+                  </ResponsiveContainer>
+               </div>
+            </GlassCard>
+         </div>
       </div>
 
       <GlassCard className="p-0 overflow-hidden">
@@ -128,7 +146,7 @@ export function AdminDashboard() {
                      onClick={() => setStatusFilter(s)}
                      className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
                         statusFilter === s 
-                           ? 'bg-blue-500/30 text-blue-300 border border-blue-400/40 shadow-[0_0_10px_rgba(59,130,246,0.25)]' 
+                           ? 'bg-brand-500/30 text-brand-300 border border-brand-400/40 shadow-[0_0_10px_rgba(81,126,221,0.25)]' 
                            : 'bg-white/5 text-white/50 border border-white/10 hover:bg-white/10 hover:text-white/70'
                      }`}
                   >
@@ -157,7 +175,7 @@ export function AdminDashboard() {
                      <div><StatusChip status={pkg.status} /></div>
                      <div className="text-white/80 text-sm">${pkg.value}</div>
                      <div 
-                        className="text-blue-400 text-sm font-medium hover:text-blue-300 cursor-pointer"
+                        className="text-brand-400 text-sm font-medium hover:text-brand-300 cursor-pointer"
                         onClick={() => setSelectedPkg(pkg)}
                      >
                         View

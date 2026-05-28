@@ -1,14 +1,17 @@
 import React, { createContext, useReducer, useEffect } from 'react';
 import { mockCustomers, mockPackages, mockInvoices } from './mockData';
+import { mockProductOrders } from '../data/productOrders';
 
 export const AppContext = createContext();
 
-const STORAGE_KEY = 'cynix_app_data';
+const STORAGE_KEY = 'fairlady_app_data';
 
 const defaultState = {
   packages: mockPackages,
   customers: mockCustomers,
   invoices: mockInvoices,
+  productOrders: mockProductOrders,
+  cart: [],
   currentUser: null,
   notifications: [],
 };
@@ -39,6 +42,8 @@ function saveState(state) {
       packages: state.packages,
       customers: state.customers,
       invoices: state.invoices,
+      productOrders: state.productOrders,
+      cart: state.cart,
       notifications: state.notifications,
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
@@ -103,6 +108,41 @@ function appReducer(state, action) {
         return inv;
       });
       return { ...state, invoices: updatedInvoices };
+    }
+    case 'ADD_TO_CART': {
+      const existingItem = state.cart.find(item => item.productId === action.payload.productId && item.variant === action.payload.variant);
+      if (existingItem) {
+        return {
+          ...state,
+          cart: state.cart.map(item => item === existingItem ? { ...item, quantity: item.quantity + action.payload.quantity } : item)
+        };
+      }
+      return { ...state, cart: [...state.cart, action.payload] };
+    }
+    case 'UPDATE_CART_QUANTITY': {
+      return {
+        ...state,
+        cart: state.cart.map(item => (item.productId === action.payload.productId && item.variant === action.payload.variant) ? { ...item, quantity: action.payload.quantity } : item)
+      };
+    }
+    case 'REMOVE_FROM_CART': {
+      return {
+        ...state,
+        cart: state.cart.filter(item => !(item.productId === action.payload.productId && item.variant === action.payload.variant))
+      };
+    }
+    case 'CLEAR_CART':
+      return { ...state, cart: [] };
+    case 'PLACE_PRODUCT_ORDER':
+      return { ...state, productOrders: [action.payload, ...state.productOrders], cart: [] };
+    case 'UPDATE_PRODUCT_ORDER_STATUS': {
+      const updatedOrders = state.productOrders.map(order => {
+        if (order.id === action.payload.orderId) {
+          return { ...order, status: action.payload.status };
+        }
+        return order;
+      });
+      return { ...state, productOrders: updatedOrders };
     }
     case 'RESET_DATA':
       localStorage.removeItem(STORAGE_KEY);

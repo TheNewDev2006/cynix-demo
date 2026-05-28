@@ -13,8 +13,8 @@ export function PackageDetailModal({ pkg, onClose }) {
          </button>
          
          <div className="flex items-center gap-4 mb-8 pr-12">
-            <div className="w-12 h-12 rounded-xl bg-blue-500/20 border border-blue-400/30 flex items-center justify-center shadow-[0_0_12px_rgba(37,99,235,0.3)]">
-               <Package className="w-6 h-6 text-blue-400" />
+            <div className="w-12 h-12 rounded-xl bg-brand-500/20 border border-brand-400/30 flex items-center justify-center shadow-[0_0_12px_rgba(27,48,112,0.3)]">
+               <Package className="w-6 h-6 text-brand-400" />
             </div>
             <div>
                <h2 className="text-2xl font-bold text-white tracking-tight">{pkg.trackingNumber}</h2>
@@ -46,7 +46,7 @@ export function PackageDetailModal({ pkg, onClose }) {
             <div className="relative pl-6 border-l-2 border-white/10 space-y-8 pb-4 ml-2">
                {[...pkg.timeline].reverse().map((event, idx) => (
                   <div key={idx} className="relative">
-                     <div className={`absolute -left-[33px] w-4 h-4 rounded-full border-4 border-[rgba(15,23,42,1)] ${idx === 0 ? 'bg-blue-400 shadow-[0_0_10px_rgba(96,165,250,0.8)]' : 'bg-white/40'}`}></div>
+                     <div className={`absolute -left-[33px] w-4 h-4 rounded-full border-4 border-[rgba(15,23,42,1)] ${idx === 0 ? 'bg-brand-400 shadow-[0_0_10px_rgba(116,152,227,0.8)]' : 'bg-white/40'}`}></div>
                      <div className={idx === 0 ? "text-white font-bold" : "text-white/80 font-medium"}>{event.status}</div>
                      <div className="text-white/50 text-sm mt-1">{new Date(event.timestamp).toLocaleString()}</div>
                   </div>

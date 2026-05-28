@@ -9,8 +9,25 @@ import { PackageDetailModal } from '../components/PackageDetailModal';
 export function StaffIntakeQueue() {
   const { packages, dispatch } = useContext(AppContext);
   const [selectedPkg, setSelectedPkg] = useState(null);
+  const [undoPkg, setUndoPkg] = useState(null);
+
   const receivedToday = packages.filter(p => p.status === 'Received at US Warehouse').length;
   const inTransit = packages.filter(p => p.status === 'In Transit to Bahamas').length;
+
+  const handleDispatch = (pkg) => {
+    dispatch({ type: 'UPDATE_PACKAGE_STATUS', payload: { packageId: pkg.id, status: 'In Transit to Bahamas' } });
+    setUndoPkg(pkg);
+    setTimeout(() => {
+       setUndoPkg(prev => prev?.id === pkg.id ? null : prev);
+    }, 5000);
+  };
+
+  const handleUndo = () => {
+    if (undoPkg) {
+       dispatch({ type: 'UPDATE_PACKAGE_STATUS', payload: { packageId: undoPkg.id, status: 'Received at US Warehouse' } });
+       setUndoPkg(null);
+    }
+  };
   
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -23,6 +40,13 @@ export function StaffIntakeQueue() {
          <KPICard title="Received at Warehouse" value={receivedToday} icon={Package} accentColor="rgba(96, 165, 250, 0.4)" />
          <KPICard title="In Transit (Dispatched)" value={inTransit} icon={BarChart3} accentColor="rgba(192, 132, 252, 0.4)" />
       </div>
+
+      {undoPkg && (
+         <div className="bg-emerald-500/20 border border-emerald-500/50 text-emerald-100 p-4 rounded-xl flex justify-between items-center animate-in fade-in slide-in-from-top-4">
+            <span>Package <strong>{undoPkg.trackingNumber}</strong> dispatched to Bahamas.</span>
+            <button onClick={handleUndo} className="font-bold text-white hover:text-emerald-200 bg-white/10 px-3 py-1 rounded-md transition-colors">Undo</button>
+         </div>
+      )}
 
       <GlassCard className="p-0 overflow-hidden">
          <div className="p-6 border-b border-white/10 bg-white/5">
@@ -49,14 +73,14 @@ export function StaffIntakeQueue() {
                      <div className="text-white/80 text-sm">${pkg.value}</div>
                      <div className="flex items-center gap-3">
                         <button 
-                           onClick={() => dispatch({ type: 'UPDATE_PACKAGE_STATUS', payload: { packageId: pkg.id, status: 'In Transit to Bahamas' } })}
+                           onClick={() => handleDispatch(pkg)}
                            className="text-emerald-400 text-sm font-medium hover:text-emerald-300 flex items-center gap-1"
                            title="Dispatch to Bahamas"
                         >
                            <Send className="w-4 h-4" />
                         </button>
                         <div 
-                           className="text-blue-400 text-sm font-medium hover:text-blue-300 cursor-pointer"
+                           className="text-brand-400 text-sm font-medium hover:text-brand-300 cursor-pointer"
                            onClick={() => setSelectedPkg(pkg)}
                         >
                            View

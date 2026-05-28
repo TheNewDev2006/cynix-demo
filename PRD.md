@@ -32,6 +32,9 @@ A purpose-built courier platform will:
 ### 2.3 Demo Objective
 The prototype must convincingly demonstrate that Cynix Inc. has the capability and vision to deliver this platform. It should feel like a real, polished product — not a mockup. The goal is to **close the deal.**
 
+### 2.4 Our Product
+The Cynix Courier Platform is a purpose-built, role-based logistics SaaS platform designed specifically for Caribbean package forwarding and last-mile delivery operators. Delivered as a fully responsive web application, it manages the entire package lifecycle with zero hardware dependencies beyond a standard smartphone camera for barcode scanning.
+
 ---
 
 ## 3. Scope — Demo Prototype
@@ -267,7 +270,39 @@ The prototype achieves its goal if the prospect can:
 
 ---
 
-## 11. Glossary
+## 12. Our Product
+
+### 12.1 Product Vision
+Our vision is to build a unified digital operating system for Caribbean courier companies, scalable from a single-island operator to a multi-island logistics network. With WhatsApp-native customer communication and real-time operational intelligence at its core, the platform eliminates operational blind spots and elevates the customer experience.
+
+### 12.2 Core Modules
+| Module Name | Primary User | Core Value Proposition | Key Screens |
+|---|---|---|---|
+| Admin | Management | Full operational oversight and revenue tracking | KPI Dashboard, Package Pipeline, Manifests |
+| Customer | End Users | Self-service tracking and invoicing | Tracking Portal, Invoices, Delivery Preferences |
+| Warehouse | Intake Staff | Fast, error-free package intake with scanning | Intake Queue, Scan Package, Warehouse Inventory |
+| Driver | Last-Mile Fleet | Streamlined route management and proof of delivery | Delivery Run, Scan & Deliver, Route Map |
+
+### 12.3 What Makes It Different
+- **Built Specifically for the Caribbean Workflow**: Tailored for US-to-Bahamas package forwarding and local last-mile routing.
+- **WhatsApp-First Notifications**: Reaches customers on the channel they already use most.
+- **No Proprietary Hardware**: Utilises any smartphone camera for QR/barcode scanning, reducing capital expenditure.
+- **Unified Codebase**: Provides role-based access from a single application without maintaining separate native apps.
+- **Production Ready Architecture**: Designed to scale smoothly to a full production deployment with zero frontend rewrites required.
+
+### 12.4 Product Roadmap (Post-Demo)
+| Phase | Focus | Key Features | Status |
+|---|---|---|---|
+| Phase 1 | Demo Prototype | Simulated UI, role dashboards, mock scanning | Current |
+| Phase 2 | Production MVP | Real backend, Stripe integration, WhatsApp API, live scanning | Planned |
+| Phase 3 | Scale | Multi-branch routing, advanced analytics, third-party API hooks | Future |
+
+### 12.5 Technology Positioning
+The demo is built as a fully client-side React Single Page Application (SPA) to demonstrate maximum speed and fluidity without infrastructure overhead. The architecture is intentionally designed for a zero-friction upgrade to a full-stack production deployment without requiring any frontend rewrites. Refer to the Production Upgrade Path table in Section 16 of the Technical Stack Document.
+
+---
+
+## 13. Glossary
 
 | Term | Definition |
 |---|---|

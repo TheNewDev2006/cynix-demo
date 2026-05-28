@@ -19,7 +19,7 @@ export function AdminCustomers() {
             return (
                <GlassCard key={customer.id} className="p-6">
                   <div className="flex items-center gap-4 mb-6">
-                     <div className="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-400/30 flex items-center justify-center text-blue-400 font-bold text-lg shadow-[0_0_12px_rgba(37,99,235,0.2)]">
+                     <div className="w-12 h-12 rounded-full bg-brand-500/20 border border-brand-400/30 flex items-center justify-center text-brand-400 font-bold text-lg shadow-[0_0_12px_rgba(27,48,112,0.2)]">
                         {customer.name.charAt(0)}
                      </div>
                      <div>
@@ -30,7 +30,7 @@ export function AdminCustomers() {
                   <div className="space-y-3 mb-6">
                      <div className="flex items-center gap-3 text-sm text-white/70">
                         <Hash className="w-4 h-4 text-white/40" />
-                        <span className="font-mono text-blue-300 bg-blue-500/10 px-2 py-0.5 rounded">{customer.mailbox}</span>
+                        <span className="font-mono text-brand-300 bg-brand-500/10 px-2 py-0.5 rounded">{customer.mailbox}</span>
                      </div>
                      <div className="flex items-center gap-3 text-sm text-white/70">
                         <Mail className="w-4 h-4 text-white/40" />

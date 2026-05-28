@@ -1,12 +1,12 @@
 export const mockCustomers = [
-  { id: 'C001', name: 'Trisha Williams', email: 'customer@demo.com', phone: '+1242-555-0100', mailbox: 'CYN-00142' },
-  { id: 'C002', name: 'Michael Davies', email: 'michael@example.com', phone: '+1242-555-0101', mailbox: 'CYN-00215' },
-  { id: 'C003', name: 'Sarah Smith', email: 'sarah@example.com', phone: '+1242-555-0102', mailbox: 'CYN-00302' },
-  { id: 'C004', name: 'John Doe', email: 'john@example.com', phone: '+1242-555-0103', mailbox: 'CYN-00411' },
-  { id: 'C005', name: 'Emma Johnson', email: 'emma@example.com', phone: '+1242-555-0104', mailbox: 'CYN-00599' },
-  { id: 'C006', name: 'David Brown', email: 'david@example.com', phone: '+1242-555-0105', mailbox: 'CYN-00620' },
-  { id: 'C007', name: 'Lisa Taylor', email: 'lisa@example.com', phone: '+1242-555-0106', mailbox: 'CYN-00788' },
-  { id: 'C008', name: 'James Wilson', email: 'james@example.com', phone: '+1242-555-0107', mailbox: 'CYN-00833' },
+  { id: 'C001', name: 'Trisha Williams', email: 'customer@demo.com', phone: '+1242-555-0100', mailbox: 'FAI-00142' },
+  { id: 'C002', name: 'Michael Davies', email: 'michael@example.com', phone: '+1242-555-0101', mailbox: 'FAI-00215' },
+  { id: 'C003', name: 'Sarah Smith', email: 'sarah@example.com', phone: '+1242-555-0102', mailbox: 'FAI-00302' },
+  { id: 'C004', name: 'John Doe', email: 'john@example.com', phone: '+1242-555-0103', mailbox: 'FAI-00411' },
+  { id: 'C005', name: 'Emma Johnson', email: 'emma@example.com', phone: '+1242-555-0104', mailbox: 'FAI-00599' },
+  { id: 'C006', name: 'David Brown', email: 'david@example.com', phone: '+1242-555-0105', mailbox: 'FAI-00620' },
+  { id: 'C007', name: 'Lisa Taylor', email: 'lisa@example.com', phone: '+1242-555-0106', mailbox: 'FAI-00788' },
+  { id: 'C008', name: 'James Wilson', email: 'james@example.com', phone: '+1242-555-0107', mailbox: 'FAI-00833' },
 ];
 
 export const STATUS_LIST = [
@@ -45,7 +45,7 @@ function generatePackages() {
 
     pkgs.push({
       id: pId,
-      trackingNumber: `CYN-${Math.random().toString(36).substring(2, 8).toUpperCase()}`,
+      trackingNumber: `FAI-${Math.random().toString(36).substring(2, 8).toUpperCase()}`,
       externalTracking: `1Z${Math.random().toString(36).substring(2, 12).toUpperCase()}`,
       customerId: customer.id,
       weight: parseFloat(weight),

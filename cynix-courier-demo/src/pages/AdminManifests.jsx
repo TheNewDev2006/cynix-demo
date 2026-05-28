@@ -11,19 +11,19 @@ export function AdminManifests() {
   const outForDelivery = packages.filter(p => p.status === 'Out for Delivery' || (p.status === 'Delivered' && new Date(p.timeline[p.timeline.length-1].timestamp).toDateString() === new Date().toDateString()));
 
   return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className="flex justify-between items-end">
+    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 print:space-y-0 print:block">
+      <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-4 print:hidden">
          <div>
             <h1 className="text-3xl font-bold text-white tracking-tight">Daily Manifests</h1>
             <p className="text-white/60 mt-1">Generate and print delivery manifests for drivers.</p>
          </div>
-         <Button onClick={() => window.print()}>
+         <Button onClick={() => window.print()} className="w-full sm:w-auto justify-center">
             <Printer className="w-4 h-4" /> Print Today's Manifest
          </Button>
       </div>
 
-      <GlassCard className="p-8">
-         <div className="flex items-center gap-4 mb-8">
+      <GlassCard className="p-4 sm:p-8 print:bg-transparent print:border-none print:shadow-none print:p-0">
+         <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-8 print:hidden">
             <div className="w-12 h-12 rounded-xl bg-purple-500/20 border border-purple-400/30 flex items-center justify-center text-purple-400 shadow-[0_0_12px_rgba(168,85,247,0.3)]">
                <FileText className="w-6 h-6" />
             </div>
@@ -33,21 +33,25 @@ export function AdminManifests() {
             </div>
          </div>
 
-         <div className="bg-white p-8 rounded-xl text-black" id="printable-manifest">
-            <div className="flex justify-between items-end mb-8 border-b-2 border-black pb-4">
-               <div>
-                  <h1 className="text-2xl font-bold tracking-tighter">CYNIX COURIER</h1>
-                  <p className="text-sm font-semibold">DAILY DELIVERY MANIFEST</p>
+         <div className="bg-white p-4 sm:p-8 rounded-xl text-black" id="printable-manifest">
+            <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-4 mb-8 border-b-2 border-black pb-4 print:flex-row print:items-end">
+               <div className="flex items-center gap-4">
+                  <img src="/logo.png" alt="FAIRLADY IMPORTS Logo" className="w-16 h-16 object-contain" />
+                  <div>
+                     <h1 className="text-2xl font-bold tracking-tighter whitespace-nowrap">FAIRLADY IMPORTS</h1>
+                     <p className="text-sm font-semibold">DAILY DELIVERY MANIFEST</p>
+                  </div>
                </div>
-               <div className="text-right">
+               <div className="sm:text-right print:text-right">
                   <p className="text-sm font-bold">DATE: {new Date().toLocaleDateString()}</p>
                   <p className="text-sm">DRIVER: Ray Thompson</p>
                   <p className="text-sm">ROUTE: Nassau Zone 1</p>
                </div>
             </div>
 
-            <table className="w-full text-sm text-left mb-8">
-               <thead>
+            <div className="overflow-x-auto mb-8">
+               <table className="w-full text-sm text-left min-w-[500px]">
+                  <thead>
                   <tr className="border-b border-gray-300">
                      <th className="py-2">Tracking No.</th>
                      <th className="py-2">Customer</th>
@@ -73,9 +77,10 @@ export function AdminManifests() {
                      </tr>
                   ))}
                </tbody>
-            </table>
+               </table>
+            </div>
 
-            <div className="grid grid-cols-2 gap-8 pt-8 mt-16 border-t border-gray-300">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-8 mt-16 border-t border-gray-300 print:grid-cols-2">
                <div>
                   <div className="border-b border-black mb-2"></div>
                   <p className="text-xs uppercase font-bold text-gray-500">Driver Signature</p>

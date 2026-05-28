@@ -10,7 +10,7 @@ export function Login() {
   const navigate = useNavigate();
 
   const handleLogin = (role, name) => {
-    dispatch({ type: 'LOGIN', payload: { role, name, email: `${role}@cynix.com` } });
+    dispatch({ type: 'LOGIN', payload: { role, name, email: `${role}@fairladyimports.com` } });
     navigate(`/${role}`);
   };
 
@@ -18,12 +18,12 @@ export function Login() {
     <div className="flex min-h-screen items-center justify-center p-4">
       <div className="w-full max-w-4xl grid md:grid-cols-2 gap-12 items-center">
         <div className="text-center md:text-left space-y-6">
-          <div className="flex items-center justify-center md:justify-start gap-4 mb-8">
-            <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center border border-blue-400/30 shadow-[0_0_20px_rgba(37,99,235,0.4)]">
-              <Package className="w-8 h-8 text-blue-400" />
+          <div className="flex items-center gap-4 mb-10">
+            <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center p-2 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+              <img src="/logo.png" alt="FAIRLADY IMPORTS Logo" className="w-full h-full object-contain" />
             </div>
             <div>
-              <h1 className="text-4xl font-bold tracking-tight text-white leading-none">CYNIX</h1>
+              <h1 className="text-4xl font-bold tracking-tight text-white leading-none">FAIRLADY IMPORTS</h1>
               <p className="text-sm text-white/60 tracking-wider uppercase mt-1">Courier Platform</p>
             </div>
           </div>
@@ -43,7 +43,7 @@ export function Login() {
           
           <div className="space-y-4">
             <Button variant="secondary" className="w-full justify-start h-16 px-6 group" onClick={() => handleLogin('admin', 'Marcus Reid')}>
-              <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
+              <div className="w-10 h-10 rounded-full bg-brand-500/20 flex items-center justify-center text-brand-400 group-hover:scale-110 transition-transform">
                 <Shield className="w-5 h-5" />
               </div>
               <div className="text-left ml-4">
@@ -83,9 +83,12 @@ export function Login() {
             </Button>
           </div>
           
-          <div className="pt-4 mt-6 border-t border-white/10 text-center">
-             <Button variant="iconPill" className="mx-auto" onClick={() => navigate('/track')}>
-                <span className="text-blue-400">Public Tracking Page</span>
+          <div className="pt-4 mt-6 border-t border-white/10 text-center flex gap-4 justify-center">
+             <Button variant="iconPill" onClick={() => navigate('/track')}>
+                <span className="text-brand-400">Public Tracking Page</span>
+             </Button>
+             <Button variant="secondary" onClick={() => navigate('/product')}>
+                <span>Our Product</span>
              </Button>
           </div>
         </GlassCard>

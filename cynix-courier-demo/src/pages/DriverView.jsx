@@ -92,7 +92,7 @@ export function DriverView() {
                   <div className="text-xs text-white/60">Delivered</div>
                </div>
                <div className="glass-card p-4 text-center">
-                  <div className="text-2xl font-bold text-blue-400">{myRun.filter(p => p.status === 'Out for Delivery').length}</div>
+                  <div className="text-2xl font-bold text-brand-400">{myRun.filter(p => p.status === 'Out for Delivery').length}</div>
                   <div className="text-xs text-white/60">Remaining</div>
                </div>
             </div>
@@ -101,7 +101,7 @@ export function DriverView() {
                {myRun.map(pkg => (
                   <GlassCard 
                      key={pkg.id} 
-                     className={`p-5 transition-all ${activeDelivery?.id === pkg.id ? 'ring-2 ring-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.3)]' : ''}`}
+                     className={`p-5 transition-all ${activeDelivery?.id === pkg.id ? 'ring-2 ring-brand-500 shadow-[0_0_20px_rgba(81,126,221,0.3)]' : ''}`}
                   >
                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                         <div>
@@ -117,7 +117,7 @@ export function DriverView() {
                         <div className="flex items-center gap-2">
                            <button 
                               onClick={() => setActiveDelivery(pkg)}
-                              className="w-10 h-10 rounded-full flex items-center justify-center bg-white/5 border border-white/10 hover:bg-white/10 transition-colors text-blue-400"
+                              className="w-10 h-10 rounded-full flex items-center justify-center bg-white/5 border border-white/10 hover:bg-white/10 transition-colors text-brand-400"
                               title="Show Route"
                            >
                               <Navigation className="w-4 h-4" />
@@ -152,7 +152,7 @@ export function DriverView() {
 
                   <Marker position={WAREHOUSE_COORDS}>
                      <Popup>
-                        <strong>Cynix Warehouse</strong><br/>
+                        <strong>FAIRLADY IMPORTS Warehouse</strong><br/>
                         Nassau, Bahamas
                      </Popup>
                   </Marker>
@@ -200,7 +200,7 @@ export function DriverView() {
                   />
                </div>
                <div className="flex justify-end gap-2 text-sm">
-                  <button className="text-blue-400 hover:text-blue-300" onClick={() => sigCanvas.current.clear()}>Clear Signature</button>
+                  <button className="text-brand-400 hover:text-brand-300" onClick={() => sigCanvas.current.clear()}>Clear Signature</button>
                </div>
 
                <div className="flex gap-4 pt-4">

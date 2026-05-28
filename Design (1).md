@@ -133,13 +133,14 @@ The glass palette replaces the flat white card system. All surfaces are transluc
 ### 3.3 Colour Tokens
 
 ```css
-/* Brand blues — used for CTAs, active states, accent highlights */
---color-brand-300: #93C5FD;   /* Light accent, icon highlights */
---color-brand-400: #60A5FA;   /* Secondary CTA, link hover */
---color-brand-500: #3B82F6;   /* Gradient start for pill buttons */
---color-brand-600: #2563EB;   /* Primary action colour */
---color-brand-700: #1D4ED8;   /* CTA gradient end */
---color-brand-glow: rgba(37, 99, 235, 0.40);   /* Button glow effect */
+/* Brand colours — Navy and Orange palette */
+--color-brand-300: #97b2e9;   /* Light accent, icon highlights */
+--color-brand-400: #7498e3;   /* Secondary CTA, link hover */
+--color-brand-500: #517edd;   /* Gradient start for pill buttons */
+--color-brand-600: #2e65d7;   /* Primary action colour */
+--color-brand-700: #2551ac;   /* CTA gradient end */
+--color-brand-glow: rgba(27, 48, 112, 0.45);   /* Button glow effect */
+--color-accent: #E8621A;      /* Orange accent */
 
 /* Text on glass — white-spectrum, never solid black on dark glass */
 --text-primary:   rgba(255, 255, 255, 0.95);   /* Headings, key values */
@@ -232,7 +233,7 @@ Weight 300 (light) is added for subheadings on dark glass where lightness reads 
 For the CYNIX wordmark and key KPI values:
 ```css
 .text-gradient {
-  background: linear-gradient(135deg, #ffffff 0%, #93C5FD 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #a8b8e8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -302,7 +303,7 @@ Shadows on glass carry luminous glows, not just darkness.
 --shadow-glass-xl:  0 32px 80px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.25);
 
 /* Button glow — appears on hover, matches button colour */
---shadow-btn-blue:    0 0 20px rgba(37, 99, 235, 0.50), 0 4px 12px rgba(0,0,0,0.25);
+--shadow-btn-blue:    0 0 20px rgba(27, 48, 112, 0.55), 0 4px 12px rgba(0,0,0,0.25);
 --shadow-btn-emerald: 0 0 20px rgba(52, 211, 153, 0.40), 0 4px 12px rgba(0,0,0,0.25);
 --shadow-btn-red:     0 0 20px rgba(248, 113, 113, 0.40), 0 4px 12px rgba(0,0,0,0.25);
 
@@ -330,7 +331,7 @@ Shadows on glass carry luminous glows, not just darkness.
   font-weight: 600;
   letter-spacing: 0.01em;
   color: white;
-  background: linear-gradient(135deg, var(--color-brand-500) 0%, var(--color-brand-700) 100%);
+  background: linear-gradient(135deg, #1B3070 0%, #0f1f4a 100%);
   border: 1px solid rgba(255, 255, 255, 0.20);
   box-shadow: 0 4px 15px var(--color-brand-glow);
   transition: all 220ms cubic-bezier(0.34, 1.56, 0.64, 1);  /* Spring easing */
@@ -424,9 +425,9 @@ Shadows on glass carry luminous glows, not just darkness.
 }
 
 .btn-icon-pill.active {
-  background: linear-gradient(135deg, rgba(37,99,235,0.30) 0%, rgba(37,99,235,0.15) 100%);
-  border: 1px solid rgba(37, 99, 235, 0.40);
-  box-shadow: 0 0 12px rgba(37, 99, 235, 0.20), inset 0 1px 0 rgba(255,255,255,0.10);
+  background: linear-gradient(135deg, rgba(27, 48, 112, 0.30) 0%, rgba(27, 48, 112, 0.15) 100%);
+  border: 1px solid rgba(27, 48, 112, 0.40);
+  box-shadow: 0 0 12px rgba(27, 48, 112, 0.20), inset 0 1px 0 rgba(255,255,255,0.10);
   color: white;
 }
 
@@ -464,7 +465,7 @@ Shadows on glass carry luminous glows, not just darkness.
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background: var(--kpi-accent-color, rgba(37, 99, 235, 0.25));
+  background: var(--kpi-accent-color, rgba(27, 48, 112, 0.25));
   filter: blur(30px);
   pointer-events: none;
 }
@@ -770,8 +771,8 @@ The table is replaced by a **glass list panel** — each row is a softly bordere
   left: 10%;
   right: 10%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--color-brand-400), transparent);
-  box-shadow: 0 0 12px var(--color-brand-400), 0 0 24px rgba(96,165,250,0.40);
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  box-shadow: 0 0 12px var(--color-accent), 0 0 24px rgba(232, 98, 26, 0.40);
   animation: scanSweep 2.5s ease-in-out infinite;
 }
 
@@ -786,7 +787,7 @@ The table is replaced by a **glass list panel** — each row is a softly bordere
 .scan-success {
   position: absolute;
   inset: 0;
-  background: rgba(52, 211, 153, 0.25);
+  background: rgba(232, 98, 26, 0.25);
   border-radius: inherit;
   animation: successFlash 500ms ease forwards;
 }

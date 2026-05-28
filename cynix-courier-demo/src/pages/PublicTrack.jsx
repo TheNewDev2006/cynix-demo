@@ -22,11 +22,11 @@ export function PublicTrack() {
   return (
     <div className="min-h-screen flex flex-col p-4">
       <header className="py-6 mb-12 text-center">
-         <div className="flex items-center justify-center gap-3 mb-2">
-            <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center border border-blue-400/30">
-               <Package className="w-6 h-6 text-blue-400" />
+         <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center p-1 shadow-[0_0_12px_rgba(255,255,255,0.2)]">
+               <img src="/logo.png" alt="FAIRLADY IMPORTS Logo" className="w-full h-full object-contain" />
             </div>
-            <h1 className="text-2xl font-bold tracking-tight text-white leading-none">CYNIX</h1>
+            <h1 className="text-2xl font-bold tracking-tight text-white leading-none">FAIRLADY IMPORTS</h1>
          </div>
          <p className="text-white/60">Public Tracking Portal</p>
       </header>
@@ -39,7 +39,7 @@ export function PublicTrack() {
                   <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
                   <input 
                      type="text" 
-                     placeholder="Enter Tracking Number (e.g. CYN-1A2B3C)" 
+                     placeholder="Enter Tracking Number (e.g. FAI-1A2B3C)" 
                      className="search-pill pl-12 py-4 text-lg"
                      value={query}
                      onChange={e => setQuery(e.target.value)}
@@ -71,7 +71,7 @@ export function PublicTrack() {
                   <div className="relative pl-6 border-l-2 border-white/10 space-y-8 pb-4">
                      {result.timeline.map((event, idx) => (
                         <div key={idx} className="relative">
-                           <div className={`absolute -left-[31px] w-4 h-4 rounded-full border-4 border-[rgba(15,23,42,1)] ${idx === result.timeline.length - 1 ? 'bg-blue-400 shadow-[0_0_10px_rgba(96,165,250,0.8)]' : 'bg-white/40'}`}></div>
+                           <div className={`absolute -left-[31px] w-4 h-4 rounded-full border-4 border-[rgba(15,23,42,1)] ${idx === result.timeline.length - 1 ? 'bg-brand-400 shadow-[0_0_10px_rgba(116,152,227,0.8)]' : 'bg-white/40'}`}></div>
                            <div className="text-white font-medium">{event.status}</div>
                            <div className="text-white/50 text-sm mt-1">{new Date(event.timestamp).toLocaleString()}</div>
                         </div>

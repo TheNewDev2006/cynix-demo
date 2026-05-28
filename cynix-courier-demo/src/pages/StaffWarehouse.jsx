@@ -47,7 +47,7 @@ export function StaffWarehouse() {
                      <div><StatusChip status={pkg.status} /></div>
                      <div className="text-white/80 text-sm">${pkg.value}</div>
                      <div 
-                        className="text-blue-400 text-sm font-medium hover:text-blue-300 cursor-pointer"
+                        className="text-brand-400 text-sm font-medium hover:text-brand-300 cursor-pointer"
                         onClick={() => setSelectedPkg(pkg)}
                      >
                         View
